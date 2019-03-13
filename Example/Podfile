@@ -4,7 +4,7 @@ platform :ios, '8.0'
 
 target 'YumiIntegration_Example' do
   pod 'YumiIntegration', :path => '../'
-
+  pod 'YumiMediationAdapters'
   target 'YumiIntegration_Tests' do
     inherit! :search_paths
 
