@@ -7,8 +7,12 @@
 //
 
 #import "YumiViewController.h"
+#import <YumiMediationSDK/YumiMediationBannerView.h>
 
-@interface YumiViewController ()
+#define YumibannerPlacementID @"l6ibkpae"
+
+@interface YumiViewController () <YumiMediationBannerViewDelegate>
+@property (nonatomic) YumiMediationBannerView *banner;
 
 @end
 
@@ -18,6 +22,38 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (IBAction)loadAndDisplayBanner:(id)sender {
+    [self.banner loadAd:YES];
+    [self.view addSubview:self.banner];
+}
+
+- (YumiMediationBannerView *)banner {
+    if (!_banner) {
+        _banner = [[YumiMediationBannerView alloc] initWithPlacementID:YumibannerPlacementID
+                                                             channelID:@""
+                                                             versionID:@""
+                                                              position:YumiMediationBannerPositionBottom
+                                                    rootViewController:self];
+        _banner.delegate = self;
+    }
+    return _banner;
+}
+
+/// Tells the delegate that an ad has been successfully loaded.
+- (void)yumiMediationBannerViewDidLoad:(YumiMediationBannerView *)adView{
+    
+}
+
+/// Tells the delegate that a request failed.
+- (void)yumiMediationBannerView:(YumiMediationBannerView *)adView didFailWithError:(YumiMediationError *)error{
+    
+}
+
+/// Tells the delegate that the banner view has been clicked.
+- (void)yumiMediationBannerViewDidClick:(YumiMediationBannerView *)adView{
+    
 }
 
 - (void)didReceiveMemoryWarning
